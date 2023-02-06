@@ -136,7 +136,7 @@ fun ProfileScreen(userId: String?, accountViewModel: AccountViewModel, navContro
                         selected = pagerState.currentPage == 0,
                         onClick = { coroutineScope.launch { pagerState.animateScrollToPage(0) } },
                         text = {
-                            Text(text = "Notes")
+                            Text(text = "记录")
                         }
                     )
 
@@ -147,7 +147,7 @@ fun ProfileScreen(userId: String?, accountViewModel: AccountViewModel, navContro
                             val userState by baseUser.liveFollows.observeAsState()
                             val userFollows = userState?.user?.follows?.size ?: "--"
 
-                            Text(text = "$userFollows Follows")
+                            Text(text = "$userFollows 关注")
                         }
                     )
 
@@ -158,7 +158,7 @@ fun ProfileScreen(userId: String?, accountViewModel: AccountViewModel, navContro
                             val userState by baseUser.liveFollows.observeAsState()
                             val userFollows = userState?.user?.followers?.size ?: "--"
 
-                            Text(text = "$userFollows Followers")
+                            Text(text = "$userFollows 被关注")
                         }
                     )
 
@@ -172,7 +172,7 @@ fun ProfileScreen(userId: String?, accountViewModel: AccountViewModel, navContro
                             val userStateRelayInfo by baseUser.liveRelayInfo.observeAsState()
                             val userRelays = userStateRelayInfo?.user?.relays?.size ?: "--"
 
-                            Text(text = "$userRelaysBeingUsed / $userRelays Relays")
+                            Text(text = "$userRelaysBeingUsed / $userRelays 中继器")
                         }
                     )
                 }
@@ -225,7 +225,7 @@ private fun ProfileHeader(
                 Icon(
                     tint = Color.White,
                     imageVector = Icons.Default.MoreVert,
-                    contentDescription = "More Options",
+                    contentDescription = "更多选项",
                 )
 
                 UserProfileDropDownMenu(baseUser, popupExpanded, { popupExpanded = false }, accountViewModel)
@@ -323,7 +323,7 @@ private fun DrawBanner(baseUser: User) {
     if (banner != null && banner.isNotBlank()) {
         AsyncImage(
             model = banner,
-            contentDescription = "Profile Image",
+            contentDescription = "个人头像",
             contentScale = ContentScale.FillWidth,
             modifier = Modifier
                 .fillMaxWidth()
@@ -332,7 +332,7 @@ private fun DrawBanner(baseUser: User) {
     } else {
         Image(
             painter = painterResource(R.drawable.profile_banner),
-            contentDescription = "Profile Banner",
+            contentDescription = "背景图",
             contentScale = ContentScale.FillWidth,
             modifier = Modifier
                 .fillMaxWidth()
@@ -429,7 +429,7 @@ private fun NSecCopyButton(
             onDismissRequest = { popupExpanded = false }
         ) {
             DropdownMenuItem(onClick = {  account.loggedIn.privKey?.let { clipboardManager.setText(AnnotatedString(it.toNsec())) }; popupExpanded = false }) {
-                Text("Copy Private Key to the Clipboard")
+                Text("复制私钥到粘贴板")
             }
         }
     }
@@ -464,7 +464,7 @@ private fun NPubCopyButton(
             onDismissRequest = { popupExpanded = false }
         ) {
             DropdownMenuItem(onClick = { clipboardManager.setText(AnnotatedString(user.pubkey.toNpub())); popupExpanded = false }) {
-                Text("Copy Public Key (NPub) to the Clipboard")
+                Text("复制公钥到粘贴板(NPub)")
             }
         }
     }
@@ -515,7 +515,7 @@ private fun EditButton(account: Account) {
         Icon(
             tint = Color.White,
             imageVector = Icons.Default.EditNote,
-            contentDescription = "Edits the User's Metadata"
+            contentDescription = "编辑用户信息"
         )
     }
 }
@@ -532,7 +532,7 @@ fun UnfollowButton(onClick: () -> Unit) {
             ),
         contentPadding = PaddingValues(vertical = 6.dp, horizontal = 16.dp)
     ) {
-        Text(text = "Unfollow", color = Color.White)
+        Text(text = "取消关注", color = Color.White)
     }
 }
 
@@ -582,7 +582,7 @@ fun UserProfileDropDownMenu(user: User, popupExpanded: Boolean, onDismiss: () ->
         onDismissRequest = onDismiss
     ) {
         DropdownMenuItem(onClick = { clipboardManager.setText(AnnotatedString(user.pubkey.toNpub() ?: "")); onDismiss() }) {
-            Text("Copy User ID")
+            Text("复制用户 ID")
         }
 
         if ( account.userProfile() != user) {
@@ -596,11 +596,11 @@ fun UserProfileDropDownMenu(user: User, popupExpanded: Boolean, onDismiss: () ->
                         )
                     }; onDismiss()
                 }) {
-                    Text("Unblock User")
+                    Text("取消屏蔽 用户")
                 }
             } else {
                 DropdownMenuItem(onClick = { user.let { accountViewModel.hide(it, context) }; onDismiss() }) {
-                    Text("Hide User")
+                    Text("隐藏用户")
                 }
             }
             Divider()

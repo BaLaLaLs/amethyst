@@ -123,7 +123,7 @@ fun LoadingFeed() {
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.Center,
     ) {
-        Text("Loading feed")
+        Text("加载内容中")
     }
 }
 
@@ -155,9 +155,9 @@ fun FeedEmpty(onRefresh: () -> Unit) {
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.Center,
     ) {
-        Text("Feed is empty.")
+        Text("没有内容")
         OutlinedButton(onClick = onRefresh) {
-            Text(text = "Refresh")
+            Text(text = "刷新")
         }
     }
 }

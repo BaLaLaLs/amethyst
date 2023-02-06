@@ -61,7 +61,7 @@ fun LoginPage(accountViewModel: AccountStateViewModel) {
 
     Box(modifier = Modifier.fillMaxSize()) {
         ClickableText(
-            text = AnnotatedString("Generate a new key"),
+            text = AnnotatedString("创建新的私钥"),
             modifier = Modifier
                 .align(Alignment.BottomCenter)
                 .padding(20.dp),
@@ -69,7 +69,7 @@ fun LoginPage(accountViewModel: AccountStateViewModel) {
                 if (acceptedTerms.value) {
                     accountViewModel.newKey()
                 } else {
-                    termsAcceptanceIsRequired = "Acceptance of terms is required"
+                    termsAcceptanceIsRequired = "需要接受条款"
                 }
             },
             style = TextStyle(
@@ -116,7 +116,7 @@ fun LoginPage(accountViewModel: AccountStateViewModel) {
                 IconButton(onClick = { showPassword = !showPassword }) {
                     Icon(
                         imageVector = if (showPassword) Icons.Outlined.VisibilityOff else Icons.Outlined.Visibility,
-                        contentDescription = if (showPassword) "Show Password" else "Hide Password"
+                        contentDescription = if (showPassword) "显示密码" else "隐藏密码"
                     )
                 }
             },
@@ -126,7 +126,7 @@ fun LoginPage(accountViewModel: AccountStateViewModel) {
                     try {
                         accountViewModel.login(key.value.text)
                     } catch (e: Exception) {
-                        errorMessage = "Invalid key"
+                        errorMessage = "无效的Key"
                     }
                 }
             )
@@ -147,10 +147,10 @@ fun LoginPage(accountViewModel: AccountStateViewModel) {
                 onCheckedChange = { acceptedTerms.value = it }
             )
 
-            Text(text = "I accept the ")
+            Text(text = "我已接受")
 
             ClickableText(
-                text = AnnotatedString("terms of use"),
+                text = AnnotatedString("使用条款"),
                 onClick = { runCatching { uri.openUri("https://github.com/vitorpamplona/amethyst/blob/main/PRIVACY.md") } },
                 style = LocalTextStyle.current.copy(color = MaterialTheme.colors.primary),
             )
@@ -170,18 +170,18 @@ fun LoginPage(accountViewModel: AccountStateViewModel) {
             Button(
                 onClick = {
                     if (!acceptedTerms.value) {
-                        termsAcceptanceIsRequired = "Acceptance of terms is required"
+                        termsAcceptanceIsRequired = "需要接受条款"
                     }
 
                     if (key.value.text.isBlank()) {
-                        errorMessage = "Key is required"
+                        errorMessage = "Key 是必填的"
                     }
 
                     if (acceptedTerms.value && key.value.text.isNotBlank()) {
                         try {
                             accountViewModel.login(key.value.text)
                         } catch (e: Exception) {
-                            errorMessage = "Invalid key"
+                            errorMessage = "无效的Key"
                         }
                     }
                 },
@@ -194,7 +194,7 @@ fun LoginPage(accountViewModel: AccountStateViewModel) {
                   backgroundColor = if (acceptedTerms.value) MaterialTheme.colors.primary else Color.Gray
                   )
             ) {
-                Text(text = "Login")
+                Text(text = "登录")
             }
         }
     }

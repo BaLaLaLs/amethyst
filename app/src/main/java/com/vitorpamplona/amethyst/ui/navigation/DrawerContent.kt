@@ -176,11 +176,11 @@ fun ProfileContent(baseAccountUser: User, modifier: Modifier = Modifier, scaffol
             Row(modifier = Modifier.padding(top = 15.dp)) {
                 Row() {
                     Text("${accountUserFollows.follows?.size ?: "--"}", fontWeight = FontWeight.Bold)
-                    Text(" Following")
+                    Text(" 关注")
                 }
                 Row(modifier = Modifier.padding(start = 10.dp)) {
                     Text("${accountUserFollows.followers?.size ?: "--"}", fontWeight = FontWeight.Bold)
-                    Text(" Followers")
+                    Text(" 被关注")
                 }
             }
         }
@@ -205,7 +205,7 @@ fun ListContent(
                         scaffoldState,
                         "User/${accountUser.pubkeyHex}",
                         Route.Profile.icon,
-                        "Profile"
+                        "个人资料"
                     )
 
                 Divider(
@@ -227,7 +227,7 @@ fun ListContent(
                     }
                     Row(modifier = Modifier.clickable(onClick = { accountViewModel.logOff() })) {
                         Text(
-                            text = "Log out",
+                            text = "退出登录",
                             modifier = Modifier.padding(vertical = 15.dp),
                             fontSize = 18.sp,
                             fontWeight = W500

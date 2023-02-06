@@ -108,7 +108,7 @@ fun NewUserMetadataView(onClose: () -> Unit, account: Account) {
                 Spacer(modifier = Modifier.height(10.dp))
 
                 OutlinedTextField(
-                    label = { Text(text = "About me") },
+                    label = { Text(text = "关于我") },
                     modifier = Modifier
                         .fillMaxWidth()
                         .height(100.dp),
@@ -116,7 +116,7 @@ fun NewUserMetadataView(onClose: () -> Unit, account: Account) {
                     onValueChange = { postViewModel.about.value = it },
                     placeholder = {
                         Text(
-                            text = "About me",
+                            text = "关于我",
                             color = MaterialTheme.colors.onSurface.copy(alpha = 0.32f)
                         )
                     },
@@ -129,7 +129,7 @@ fun NewUserMetadataView(onClose: () -> Unit, account: Account) {
                 Spacer(modifier = Modifier.height(10.dp))
 
                 OutlinedTextField(
-                    label = { Text(text = "Avatar URL") },
+                    label = { Text(text = "头像地址") },
                     modifier = Modifier.fillMaxWidth(),
                     value = postViewModel.picture.value,
                     onValueChange = { postViewModel.picture.value = it },
@@ -145,7 +145,7 @@ fun NewUserMetadataView(onClose: () -> Unit, account: Account) {
                 Spacer(modifier = Modifier.height(10.dp))
 
                 OutlinedTextField(
-                    label = { Text(text = "Banner URL") },
+                    label = { Text(text = "背景图地址") },
                     modifier = Modifier.fillMaxWidth(),
                     value = postViewModel.banner.value,
                     onValueChange = { postViewModel.banner.value = it },
